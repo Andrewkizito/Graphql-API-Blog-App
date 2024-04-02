@@ -12,23 +12,17 @@ const schema = buildSchema(`
         password: String!
     }
 
-    type Query {
-        hello: String
-    }
-
     type Mutation {
         registerUser(input: RegisterUserInput): Boolean
     }
 
     schema {
-        query: Query,
         mutation: Mutation
     }
 `)
 
 const rootResolver = {
     // Queries
-    hello: hello,
     // Mutations
     registerUser: registerUser
 } 
