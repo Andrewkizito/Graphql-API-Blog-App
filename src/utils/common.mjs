@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { createHash } from "node:crypto"
 
 /**
  * Validate data against a Joi schema.
@@ -16,4 +17,8 @@ function validateData(data, schema) {
     }
 }
 
-export { validateData }
+function createHashFromString(data) {
+    return createHash('sha256').update(data).digest().toString('hex')
+}
+
+export { validateData, createHashFromString }
