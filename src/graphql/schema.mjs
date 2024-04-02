@@ -3,7 +3,7 @@ import { buildSchema } from "graphql";
 
 // Resolvers
 import { hello } from "./resolvers/blog.mjs";
-import { registerUser } from "./resolvers/auth.mjs";
+import { loginUser, registerUser } from "./resolvers/auth.mjs";
 
 const schema = buildSchema(`
     input RegisterUserInput {
@@ -12,12 +12,22 @@ const schema = buildSchema(`
         password: String!
     }
 
-    type Mutation {
-        registerUser(input: RegisterUserInput): Boolean
+    input LoginUserInput {
+        identifier: String!
+        password: String!
+    }
+
+    type AuthResult {
+        jwt: String
     }
 
     type Query {
         hello: String
+    }
+
+    type Mutation {
+        registerUser(input: RegisterUserInput): Boolean
+        loginUser(input: LoginUserInput): AuthResult
     }
 
     schema {
@@ -30,7 +40,8 @@ const rootResolver = {
     // Queries
     hello: hello,
     // Mutations
-    registerUser: registerUser
+    registerUser: registerUser,
+    loginUser: loginUser
 } 
 
 export { rootResolver, schema }
