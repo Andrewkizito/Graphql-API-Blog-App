@@ -5,4 +5,11 @@ VALUES
 ($1, $2, $3)
 `
 
-export { CREATE_USER }
+const FIND_USER_BY_EMAIL_OR_USERNAME = `
+SELECT username, password
+FROM users
+WHERE username = $1
+OR email = $1
+`
+
+export { CREATE_USER, FIND_USER_BY_EMAIL_OR_USERNAME }
