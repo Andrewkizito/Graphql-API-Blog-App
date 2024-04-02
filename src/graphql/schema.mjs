@@ -4,7 +4,7 @@ import { buildSchema } from "graphql";
 // Resolvers
 import { hello } from "./resolvers/blog.mjs";
 
-export const schema = buildSchema(`
+const schema = buildSchema(`
     type TestData {
         action: String!
         message: String!
@@ -19,6 +19,8 @@ export const schema = buildSchema(`
     }
 `)
 
-export const rootResolver = {
+const rootResolver = {
     hello: hello
 } 
+
+export { rootResolver, schema }
