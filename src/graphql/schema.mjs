@@ -3,24 +3,34 @@ import { buildSchema } from "graphql";
 
 // Resolvers
 import { hello } from "./resolvers/blog.mjs";
+import { registerUser } from "./resolvers/auth.mjs";
 
 const schema = buildSchema(`
-    type TestData {
-        action: String!
-        message: String!
+    input RegisterUserInput {
+        username: String!
+        email: String!
+        password: String!
     }
 
     type Query {
-        hello: TestData
+        hello: String
+    }
+
+    type Mutation {
+        registerUser(input: RegisterUserInput): Boolean
     }
 
     schema {
-        query: Query
+        query: Query,
+        mutation: Mutation
     }
 `)
 
 const rootResolver = {
-    hello: hello
+    // Queries
+    hello: hello,
+    // Mutations
+    registerUser: registerUser
 } 
 
 export { rootResolver, schema }
