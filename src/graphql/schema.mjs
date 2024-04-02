@@ -16,13 +16,19 @@ const schema = buildSchema(`
         registerUser(input: RegisterUserInput): Boolean
     }
 
+    type Query {
+        hello: String
+    }
+
     schema {
+        query: Query
         mutation: Mutation
     }
 `)
 
 const rootResolver = {
     // Queries
+    hello: hello,
     // Mutations
     registerUser: registerUser
 } 
